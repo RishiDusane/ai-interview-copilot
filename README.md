@@ -5,7 +5,7 @@
 
 <!-- Animated Typing SVG -->
 <a href="https://git.io/typing-svg">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=6366F1&center=true&vCenter=true&random=false&width=700&lines=Upload+Resume+%E2%86%92+Get+Personalized+Questions;Answer+%E2%86%92+Get+Staff-Engineer+Feedback;Score+%2B+Strengths+%2B+Weaknesses+%2B+Model+Answer;Ace+Your+Next+Technical+Interview+%F0%9F%9A%80" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=6366F1&center=true&vCenter=true&random=false&width=700&lines=Upload+Resume+%E2%86%92+Get+Personalized+Questions;Answer+%E2%86%92+Get+Staff-Engineer+Feedback;Score+%2B+Strengths+%2B+Weaknesses+%2B+Model+Answer;Secure+Auth+%2B+Email+Verification+%F0%9F%94%90;Ace+Your+Next+Technical+Interview+%F0%9F%9A%80" alt="Typing SVG" />
 </a>
 
 <br/><br/>
@@ -16,6 +16,8 @@
 [![Google Gemini](https://img.shields.io/badge/Gemini_AI-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev)
 [![Python](https://img.shields.io/badge/Python_3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev)
+[![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://sqlite.org)
+[![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)](https://jwt.io)
 
 <br/>
 
@@ -47,6 +49,7 @@
 - Vague feedback like *"good job"*
 - No model answers to learn from
 - Static difficulty, no real progression
+- No user accounts or history
 
 </td>
 <td width="50%">
@@ -57,6 +60,7 @@
 - Honest scores from 1–10 (no flat 6s!)
 - Expert-level model answers every round
 - Dynamic follow-ups that dig deeper
+- Secure accounts with JWT authentication
 
 </td>
 </tr>
@@ -64,7 +68,52 @@
 
 ---
 
+## 📸 Screenshots
+
+### 🔐 Login Page
+<img width="1920" height="1080" alt="Login" src="https://github.com/user-attachments/assets/7f0f5513-3b7d-4556-8109-0d0eb9e87e5f" />
+
+
+### 📝 Create Account
+<img width="1920" height="1080" alt="CreateAccount" src="https://github.com/user-attachments/assets/da918068-b2a4-48fb-ad1e-153c7d88a606" />
+
+
+### 🔑 Forgot Password
+<img width="1920" height="1080" alt="ForgotPassword" src="https://github.com/user-attachments/assets/b2c3c7c3-4d96-4776-abc6-7c28f01fc502" />
+
+
+### 🏠 Home Page — Resume Upload
+<img width="1920" height="1080" alt="HomePage" src="https://github.com/user-attachments/assets/77f6a3e1-d64d-4de6-8e3c-cb033f6ead5a" />
+
+
+### 💬 Live Interview Chat
+<img width="1920" height="1080" alt="Interview Chat Page" src="https://github.com/user-attachments/assets/a2c3aac7-c828-438f-ad65-07aa9dd50a54" />
+
+
+### 📊 Summary Dashboard
+<img width="1920" height="1080" alt="Summary dashboard" src="https://github.com/user-attachments/assets/f7918835-f656-493d-8931-e18817a60d2e" />
+
+
+---
+
 ## ✨ Features
+
+<details>
+<summary><b>🔐 Secure Authentication System</b></summary>
+<br/>
+
+Full production-grade authentication built in:
+
+- **Register** with full name, email & password
+- **Email verification** — account activated via verification link
+- **JWT-based login** — secure token stored in localStorage
+- **Forgot password** — reset link sent to email
+- **Protected routes** — interview pages require login
+- **Auto logout** — token expiry handled automatically
+- Password strength indicator on registration
+- Show/Hide password toggle on all forms
+
+</details>
 
 <details>
 <summary><b>🧠 Intelligent Resume-Based Question Generation</b></summary>
@@ -112,6 +161,7 @@ Each evaluation includes:
 - Typing animation dots while AI is generating
 - Smooth slide-in evaluation cards
 - Auto-scroll to latest message
+- User name displayed in header with logout button
 - Keyboard shortcuts: `Enter` to send · `Shift+Enter` for new line
 
 </details>
@@ -128,6 +178,7 @@ Post-interview analytics page with:
 - Specific improvement areas based on actual gaps observed
 - Full interview transcript log
 - PDF Report download
+- Logout button in header
 
 </details>
 
@@ -141,20 +192,37 @@ ai-interview-copilot/
 ├── 🎨 frontend/
 │   ├── src/
 │   │   ├── pages/
+│   │   │   ├── Login.jsx             ← Secure login page
+│   │   │   ├── Register.jsx          ← Create account page
+│   │   │   ├── ForgotPassword.jsx    ← Password reset request
+│   │   │   ├── ResetPassword.jsx     ← Password reset form
+│   │   │   ├── VerifyEmail.jsx       ← Email verification
 │   │   │   ├── ResumeUpload.jsx      ← Drag & drop upload + difficulty picker
 │   │   │   ├── InterviewChat.jsx     ← Live chat + evaluation cards
 │   │   │   └── InterviewSummary.jsx  ← Analytics dashboard
+│   │   ├── components/
+│   │   │   └── ProtectedRoute.jsx    ← Auth guard for private pages
 │   │   ├── App.jsx
 │   │   └── main.jsx
 │   └── vite.config.js
 │
 ├── ⚙️ backend/
-│   ├── main.py                       ← FastAPI routes
+│   ├── main.py                       ← FastAPI app + CORS + routes
+│   ├── database.py                   ← SQLAlchemy DB connection
+│   ├── models/
+│   │   └── user.py                   ← User model
+│   ├── schemas/
+│   │   └── auth.py                   ← Pydantic request/response schemas
+│   ├── routes/
+│   │   └── auth.py                   ← Auth endpoints
 │   ├── services/
-│   │   └── gemini_service.py         ← AI evaluation + prompt engineering
+│   │   ├── gemini_service.py         ← AI evaluation + prompt engineering
+│   │   ├── auth_service.py           ← JWT + password hashing
+│   │   └── email_service.py          ← Email sending logic
 │   └── utils/
 │       └── pdf_parser.py             ← Resume text extraction
 │
+├── screenshots/                      ← App screenshots
 ├── .env.example                      ← Environment variable template
 ├── .gitignore
 └── README.md
@@ -199,7 +267,7 @@ pip install -r requirements.txt
 
 # Set up your environment variables
 cp .env.example .env
-# Open .env and paste your GEMINI_API_KEY
+# Open .env and add your keys
 
 # Start the API server
 uvicorn main:app --reload
@@ -213,7 +281,6 @@ uvicorn main:app --reload
 
 ```bash
 cd frontend
-
 npm install
 npm run dev
 ```
@@ -228,7 +295,7 @@ npm run dev
 Open → http://localhost:5173
 ```
 
-Upload your PDF resume → Select difficulty → Begin interview 🎯
+Create account → Verify email → Login → Upload Resume → Begin interview 🎯
 
 ---
 
@@ -238,20 +305,38 @@ Create a `.env` file inside `/backend/`:
 
 ```env
 GEMINI_API_KEY=your_gemini_api_key_here
+SECRET_KEY=your_secret_key_here
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+
+# Optional — for real email sending
+MAIL_USERNAME=your_email@gmail.com
+MAIL_PASSWORD=your_gmail_app_password
+MAIL_FROM=your_email@gmail.com
+MAIL_PORT=587
+MAIL_SERVER=smtp.gmail.com
 ```
 
 | Variable | Description | Required |
 |----------|-------------|----------|
-| `GEMINI_API_KEY` | Google Gemini API key from [AI Studio](https://aistudio.google.com) | ✅ Yes |
+| `GEMINI_API_KEY` | Google Gemini API key | ✅ Yes |
+| `SECRET_KEY` | JWT signing secret | ✅ Yes |
+| `ALGORITHM` | JWT algorithm (HS256) | ✅ Yes |
+| `MAIL_USERNAME` | Gmail address for sending emails | ⚡ Optional |
+| `MAIL_PASSWORD` | Gmail App Password | ⚡ Optional |
 
-> ⚠️ `.env` is already listed in `.gitignore` — your keys are safe. Never commit them.
+> 💡 **Without email config**: verification & reset links are printed to the terminal for easy testing.
+
+> ⚠️ `.env` is already listed in `.gitignore` — your keys are safe.
 
 ---
 
 ## 🧠 How the AI Pipeline Works
 
 ```
-📄 Resume PDF
+👤 User registers & logs in (JWT)
+     ↓
+📄 Resume PDF uploaded
      ↓
   Text Extraction (PyMuPDF)
      ↓
@@ -273,13 +358,9 @@ GEMINI_API_KEY=your_gemini_api_key_here
   Next Question → Loop continues
      ↓
   Summary Dashboard Generated
+     ↓
+  Logout securely 🔐
 ```
-
-**Reliability features built in:**
-- Forces Gemini to return **only raw JSON** — no markdown, no preamble
-- Safe extraction: `text[text.find("{") : text.rfind("}")+1]`
-- Full fallback system — the UI **never crashes** or shows parsing errors
-- `.get()` defaults on every field for bulletproof data handling
 
 ---
 
@@ -291,6 +372,9 @@ GEMINI_API_KEY=your_gemini_api_key_here
 | **Styling** | CSS-in-JSX `<style>` blocks | Zero-dependency, bulletproof rendering |
 | **Backend** | FastAPI (Python) | High-performance REST API |
 | **AI Engine** | Google Gemini API | Question generation + evaluation |
+| **Database** | SQLite + SQLAlchemy | User accounts + auth data |
+| **Auth** | JWT + passlib/bcrypt | Secure token-based authentication |
+| **Email** | fastapi-mail | Verification & password reset emails |
 | **PDF Parsing** | PyMuPDF / pdfplumber | Resume text extraction |
 | **HTTP** | Axios | Frontend ↔ Backend communication |
 
@@ -301,22 +385,17 @@ GEMINI_API_KEY=your_gemini_api_key_here
 All contributions are welcome!
 
 ```bash
-# 1. Fork this repository
-# 2. Create your feature branch
 git checkout -b feature/your-amazing-feature
-
-# 3. Make your changes and commit
 git commit -m "✨ Add amazing feature"
-
-# 4. Push and open a Pull Request
 git push origin feature/your-amazing-feature
+# Open a Pull Request
 ```
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License**.
 
 ---
 
@@ -331,11 +410,10 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 <br/>
 
-<!-- Footer Wave -->
 <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=6366f1&height=120&section=footer"/>
 
 **⭐ If this project helped you land your dream job, please star the repo! ⭐**
 
-*Powered by 🤖 Gemini AI · ⚡ FastAPI · ⚛️ React*
+*Powered by 🤖 Gemini AI · ⚡ FastAPI · ⚛️ React · 🔐 JWT Auth*
 
 </div>
