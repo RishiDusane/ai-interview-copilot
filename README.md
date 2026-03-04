@@ -327,6 +327,7 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 **👨‍💻 Built by Rishi Dusane**
 
 [![GitHub](https://img.shields.io/badge/GitHub-RishiDusane-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/RishiDusane)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Rishi_Dusane-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/rishidusane/)
 
 <br/>
 
