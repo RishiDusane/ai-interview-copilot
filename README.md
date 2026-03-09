@@ -54,7 +54,7 @@
 </td>
 <td width="50%">
 
-### ✅ AI Interview Copilot
+### ✅ AI Interview Co-Pilot
 - Questions based on **YOUR actual resume**
 - Feedback that quotes **what you said**
 - Honest scores from 1–10 (no flat 6s!)
